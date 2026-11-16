@@ -1,0 +1,66 @@
+# AWS Reconnaissance – Google Dorks
+
+Purpose: Identify potential AWS infrastructure, exposed AWS-related configurations, and publicly indexed credential references during authorized bug bounty reconnaissance.
+
+Replace `example.com` with your authorized target domain.
+
+---
+
+## 1. AWS Credential Exposure Dorks
+
+```text
+site:example.com "AKIA" "aws_access_key_id"
+
+site:example.com "aws_secret_access_key"
+
+site:example.com "AWS_ACCESS_KEY_ID"
+
+site:example.com "AWS_SECRET_ACCESS_KEY"
+
+site:example.com "aws_access_key_id" filetype:env
+
+site:example.com "aws_secret_access_key" filetype:json
+
+site:example.com "AWS_SESSION_TOKEN"
+
+site:example.com "s3.amazonaws.com" "AWS"
+```
+
+## 2. AWS Infrastructure Fingerprinting Dorks
+
+```text
+site:example.com "amazonaws.com"
+
+site:example.com "s3.amazonaws.com"
+
+site:example.com "cloudfront.net"
+
+site:example.com "execute-api"
+
+site:example.com "AWS"
+
+site:example.com "Amazon Web Services"
+
+site:example.com "x-amz-"
+
+site:example.com "X-Amz-Credential"
+```
+
+## 3. Investigation Notes
+
+| Indicator | Possible finding |
+|---|---|
+| AKIA | AWS access key ID format |
+| aws_secret_access_key | Secret credential reference |
+| AWS_SESSION_TOKEN | Temporary AWS credential reference |
+| amazonaws.com | AWS service reference |
+| s3.amazonaws.com | S3 endpoint reference |
+| cloudfront.net | CloudFront distribution reference |
+| execute-api | API Gateway endpoint reference |
+| x-amz- | AWS-related HTTP header or parameter |
+
+
+
+**Category:** Bug Bounty Reconnaissance  
+**Technique:** Google Dorking  
+**Focus:** AWS Infrastructure & Credential Exposure
